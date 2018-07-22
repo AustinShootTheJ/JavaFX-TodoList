@@ -5,10 +5,57 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
-<BorderPane fx:controller="com.mccune.todolist.Controller"
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ToggleButton?>
+<BorderPane fx:id="mainBorderPane" fx:controller="com.mccune.todolist.Controller"
             xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New..." onAction="#showNewItemDialog"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Edit" onAction="#showEditItemDialog"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit" onAction="#handleExit"/>
+
+                    </items>
+                </Menu>
+            </MenuBar>
+            <ToolBar>
+                <HBox>
+                   <Button onAction="#showNewItemDialog">
+                       <tooltip>
+                           <Tooltip text="Add a new todo item."/>
+                       </tooltip>
+                           <graphic>
+                               <ImageView>
+                                   <Image url="@/toolbarButtonGraphics/general/New24.gif"/>
+                               </ImageView>
+                           </graphic>
+                   </Button>
+                    <ToggleButton fx:id="filterToggleButton" text="Today's Items" onAction="#handleFilterButton">
+                        <tooltip>
+                            <Tooltip text="Button Down: Show Today's items only. Button Up: Show all items"/>
+                        </tooltip>
+                    </ToggleButton>
+                </HBox>
+            </ToolBar>
+        </VBox>
+
+    </top>
     <left>
-        <ListView fx:id="todoListView">
+        <ListView fx:id="todoListView" onKeyPressed="#handleKeyPressed">
 
         </ListView>
     </left>
@@ -16,7 +63,7 @@
     <center>
         <VBox style="-fx-background-color:white">
             <!--Vbox.vgrow gives as much space as possible to the text area. The other label gets only the space necessary for it to display-->
-            <TextArea fx:id="itemDetialsTextArea" VBox.vgrow="ALWAYS"/>
+            <TextArea fx:id="itemDetialsTextArea" VBox.vgrow="ALWAYS" wrapText="true"/>
             <HBox>
                 <Label text="Due: " style="-fx-background-color:white">
                     <font>

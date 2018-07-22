@@ -38,8 +38,9 @@ public class TodoItem {
         this.deadline = deadline;
     }
 
-    @Override
-    public String toString() {
-        return shortDescription;
-    }
+    // used this prior to the cell factory to show the text in our object location.
+//    @Override
+//    public String toString() {
+//        return shortDescription;
+//    }
 }
